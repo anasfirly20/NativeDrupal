@@ -6,6 +6,7 @@ import {
   View,
   Image,
   SafeAreaView,
+  Alert
 } from "react-native";
 
 // Styles
@@ -13,33 +14,74 @@ import { loginStyle } from "../styles/Login";
 
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
-import loginImg from "../assets/nativeLogin.png"
+import { create } from "apisauce";
 
 // Components
 import Input from "../components/Input";
 import { inputStyle } from "../styles/Input";
+
+// 
 interface Props {
     navigation: NavigationProp<any>;
   }
 
-const LoginScreen = ({navigation} : Props) => {
+  const api = create({
+    baseURL: "https://lzone.secret-agents.ru/api/v2"
+  })
 
+const LoginScreen = ({navigation} : Props) => {
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+    })
+
+    const handleLogin = async () => {
+        try {
+            if(data?.email && data?.password){
+                const res = await api.post("/auth/sign_in", data)
+                console.log("RES >>>", res);
+                console.log("DATA >>>", data);
+                
+                if(res?.ok){
+                    navigation.navigate('News');
+                } else {
+                    Alert.alert('Login failed')
+                }
+            }
+        } catch(err){
+            Alert.alert('Error', 'An error occurred while logging in.');
+        }
+    }
+
+    
 return (
     <SafeAreaView style={loginStyle.container}>
         <View>
             <View>
-                <Image source={loginImg} style={loginStyle.img} />
+            <Image source={require('../assets/login.png')} style={loginStyle.img} />
             </View>
             <View style={loginStyle.content}>
                 <Text style={loginStyle.textHeader}>
                     Login
                 </Text>
-                <Input label="Email" placeholder="Email ID" />
-                <Input label="Password" placeholder="Password" />
+                <Input 
+                placeholder="Email ID"
+                keyboardType="email-address"
+                onChangeText={(e: string) => setData({...data, email: e})}
+                />
+                <Input 
+                placeholder="Password" 
+                onChangeText={(e: string) => setData({...data, password: e})}
+                secureTextEntry={true}
+                />
                 <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
             <TouchableOpacity
                 activeOpacity={0.7}
-                style={loginStyle.buttonContainer}>
+                style={loginStyle.buttonContainer}
+                onPress={() => {
+                    handleLogin()
+                }}
+                >
                 <Text style={loginStyle.buttonLabel}>
                     Login
                 </Text>
@@ -47,7 +89,7 @@ return (
             </View>
         </View>
     </SafeAreaView>
-)
+    )
 }
 
 export default LoginScreen;
