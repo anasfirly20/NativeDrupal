@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getAccessToken } from './src/utils';
+import { getAccessToken, removeAccessToken } from './src/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Screens
@@ -30,7 +30,7 @@ function App(): JSX.Element {
   };
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem('accessToken');
+    removeAccessToken()
     setUser(false);
   };
   
