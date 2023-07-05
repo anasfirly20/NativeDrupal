@@ -15,6 +15,7 @@ import { loginStyle } from "../styles/Login";
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
 import { create } from "apisauce";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components
 import Input from "../components/Input";
@@ -39,10 +40,12 @@ const LoginScreen = ({navigation} : Props) => {
         try {
             if(data?.email && data?.password){
                 const res = await api.post("/auth/sign_in", data)
-                console.log("RES >>>", res);
-                console.log("DATA >>>", data);
-                
                 if(res?.ok){
+                    const accessToken = res?.headers?.["access-token"];
+                    if(accessToken){
+                        await AsyncStorage.setItem('accessToken', accessToken);
+                    }
+                    console.log(accessToken)
                     navigation.navigate('News');
                 } else {
                     Alert.alert('Login failed')
