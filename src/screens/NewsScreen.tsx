@@ -77,7 +77,6 @@ interface Props {
       })
       const news = res?.data?.news
       setNews(news)
-      // news?.map((e) => console.log(e?.id))
     } catch (error) {
       console.log(error);
       
@@ -88,6 +87,18 @@ interface Props {
     getAllNews()
   }, [])
   
+    // GET news by id
+    const getNewsById = async ( id : number ) => {
+      console.log("ID >>", id);
+      
+      try {
+        const res = await newsApi.getNewsById(id)
+        console.log("RES>>>",res?.data?.news);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
   
   return (
     <SafeAreaView>
@@ -102,7 +113,7 @@ interface Props {
                 description={item?.short_text}
                 source={item?.image_url}
                 onPress={() => {
-                    console.log(item?.id);
+                    getNewsById(item?.id)
                   }}
                 />
               )}
