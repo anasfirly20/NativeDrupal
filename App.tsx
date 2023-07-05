@@ -43,7 +43,13 @@ function App(): JSX.Element {
      >
       {user ? (
         <Stack.Screen name="News"
-        options={{ title: 'News' }}
+        options={{
+          headerShown: false,
+          headerTitle: 'News Feed',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
         component={NewsScreen}
         initialParams={{ action: 'LOGOUT', handleAction: handleLogout }} />
         ) : (

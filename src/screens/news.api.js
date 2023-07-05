@@ -10,4 +10,10 @@ export default class newsApi {
   static async getAllNews(headers) {
     return await api.get('/news', {}, {headers});
   }
+
+  // Get news by id
+  static async getNewsById(id) {
+    return await api.get(`/news/${id}`,);
+  }
+
 }

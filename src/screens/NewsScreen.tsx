@@ -32,6 +32,7 @@ import { newsStyle } from "../styles/News";
 
 // Components
 import ButtonCustom from "../components/ButtonCustom";
+import CardNews from "../components/CardNews";
 
 interface Props {
     navigation: NavigationProp<any>;
@@ -86,31 +87,35 @@ interface Props {
   useEffect(() => {
     getAllNews()
   }, [])
-
-  // news.map((e) => console.log(e?.title))
   
   
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: "white"}}>
-      <View style={newsStyle.container}>
-        <ButtonCustom
-        styleTO={loginStyle.buttonContainer}
-        styleText={loginStyle.buttonLabel}
-        labelTO="Logout"
-        onPress={handleAction}
-        />
-        <View style={{marginTop: 30}}>
-          <FlatList
-          data={news}
-          renderItem={({item}) => (
-            <View style={newsStyle.cardContainer}>
-              <Text style={newsStyle.cardTextHeader}>{item?.title}</Text>
-              <Text>{item?.short_text && filterText(item?.short_text)}</Text>
-            </View>
-          )}
-          />
-        </View>
-      </View>
+    <SafeAreaView>
+          <Text style={newsStyle.textHeader}>News Feed</Text>
+          <View style={newsStyle.contentContainer}>
+            <FlatList
+              style={{ paddingHorizontal: 5}}
+              data={news}
+              renderItem={({item}) => (
+                <CardNews
+                title={item?.title}
+                description={item?.short_text}
+                source={item?.image_url}
+                onPress={() => {
+                    console.log(item?.id);
+                  }}
+                />
+              )}
+              ItemSeparatorComponent={() => <View style={{width: 30}} />}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+            {/* <ButtonCustom
+            styleTO={loginStyle.buttonContainer}
+            styleText={loginStyle.buttonLabel}
+            labelTO="Logout"
+            onPress={handleAction}
+            /> */}
     </SafeAreaView>
   )
 }
