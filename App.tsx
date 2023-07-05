@@ -38,7 +38,7 @@ function App(): JSX.Element {
    <NavigationContainer>
      <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: false, 
       }}
      >
       {user ? (

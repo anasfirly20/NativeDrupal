@@ -19,7 +19,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components
 import Input from "../components/Input";
+import ButtonCustom from "../components/ButtonCustom";
+
+// Styles
 import { inputStyle } from "../styles/Input";
+
+// Api
+import newsApi from "./news.api";
 
 // 
 interface Props {
@@ -41,25 +47,31 @@ const LoginScreen = ({navigation, route} : Props) => {
 
     const handleLogin = async () => {
         try {
-            if(data?.email && data?.password){
-                const res = await api.post("/auth/sign_in", data)
-                if(res?.ok){
-                    const accessToken = res?.headers?.["access-token"];
-                    if(accessToken){
-                        await AsyncStorage.setItem('accessToken', accessToken);
-                    }
-                    console.log("TOKEN >>",accessToken)
-                    handleAction()
-                } else {
-                    Alert.alert('Login failed')
-                }
+          if (data?.email && data?.password) {
+            const res = await newsApi.SignIn(data);
+            if (res?.ok) {
+              const headers = res?.headers;
+              const accessToken = headers?.["access-token"];
+              const uid = headers?.["uid"];
+              const client = headers?.["client"];
+              if (accessToken && uid && client) {
+                await AsyncStorage.multiSet([
+                  ["access-token", accessToken],
+                  ["uid", uid],
+                  ["client", client],
+                ]);
+              }
+              handleAction();
             } else {
-                Alert.alert('Missing Email / Password')
+              Alert.alert("Login failed");
             }
-        } catch(err){
-            Alert.alert('Error', 'An error occurred while logging in.');
+          } else {
+            Alert.alert("Missing Email / Password");
+          }
+        } catch (err) {
+          Alert.alert("Error", "An error occurred while logging in.");
         }
-    }
+      };
 
     
 return (
@@ -73,27 +85,22 @@ return (
                     Login
                 </Text>
                 <Input 
-                placeholder="Email ID"
-                keyboardType="email-address"
-                onChangeText={(e: string) => setData({...data, email: e})}
+                  placeholder="Email ID"
+                  keyboardType="email-address"
+                  onChangeText={(e: string) => setData({...data, email: e})}
                 />
                 <Input 
-                placeholder="Password" 
-                onChangeText={(e: string) => setData({...data, password: e})}
-                secureTextEntry={true}
+                  placeholder="Password" 
+                  onChangeText={(e: string) => setData({...data, password: e})}
+                  secureTextEntry={true}
                 />
                 <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
-            <TouchableOpacity
-                activeOpacity={0.7}
-                style={loginStyle.buttonContainer}
-                onPress={() => {
-                    handleLogin()
-                }}
-                >
-                <Text style={loginStyle.buttonLabel}>
-                    Login
-                </Text>
-            </TouchableOpacity>
+                <ButtonCustom
+                  styleTO={loginStyle.buttonContainer}
+                  styleText={loginStyle.buttonLabel}
+                  labelTO="Login"
+                  onPress={handleLogin}
+                />
             </View>
         </View>
     </SafeAreaView>
