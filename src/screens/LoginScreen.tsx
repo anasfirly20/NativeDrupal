@@ -21,9 +21,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from "../components/Input";
 import ButtonCustom from "../components/ButtonCustom";
 
-// Styles
-import { inputStyle } from "../styles/Input";
-
 // Api
 import newsApi from "./news.api";
 

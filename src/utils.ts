@@ -38,3 +38,8 @@ export const removeAccessToken = async (): Promise<void> => {
     console.log('Error removing access token:', err);
   }
 };
+
+// 
+export const filterText = (text: string) => {
+  return text.replace(/<\/?p>/g, '')
+}

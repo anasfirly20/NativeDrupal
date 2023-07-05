@@ -25,7 +25,7 @@ import { loginStyle } from "../styles/Login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Utils
-import { getAccessToken, getUID, getClient } from "../utils";
+import { getAccessToken, getUID, getClient, filterText } from "../utils";
 
 // Styles
 import { newsStyle } from "../styles/News";
@@ -99,6 +99,17 @@ interface Props {
         labelTO="Logout"
         onPress={handleAction}
         />
+        <View style={{marginTop: 30}}>
+          <FlatList
+          data={news}
+          renderItem={({item}) => (
+            <View style={newsStyle.cardContainer}>
+              <Text style={newsStyle.cardTextHeader}>{item?.title}</Text>
+              <Text>{item?.short_text && filterText(item?.short_text)}</Text>
+            </View>
+          )}
+          />
+        </View>
       </View>
     </SafeAreaView>
   )
