@@ -24,13 +24,16 @@ import { inputStyle } from "../styles/Input";
 // 
 interface Props {
     navigation: NavigationProp<any>;
+    route: any
   }
 
   const api = create({
     baseURL: "https://lzone.secret-agents.ru/api/v2"
   })
 
-const LoginScreen = ({navigation} : Props) => {
+const LoginScreen = ({navigation, route} : Props) => {
+    const { handleAction } = route.params;
+    
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -45,11 +48,13 @@ const LoginScreen = ({navigation} : Props) => {
                     if(accessToken){
                         await AsyncStorage.setItem('accessToken', accessToken);
                     }
-                    console.log(accessToken)
-                    navigation.navigate('News');
+                    console.log("TOKEN >>",accessToken)
+                    handleAction()
                 } else {
                     Alert.alert('Login failed')
                 }
+            } else {
+                Alert.alert('Missing Email / Password')
             }
         } catch(err){
             Alert.alert('Error', 'An error occurred while logging in.');
