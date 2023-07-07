@@ -89,15 +89,17 @@ interface Props {
   
     // GET news by id
     const getNewsById = async ( id : number ) => {
-      console.log("ID >>", id);
-      
       try {
         const res = await newsApi.getNewsById(id)
-        console.log("RES>>>",res?.data?.news);
-        
+        // console.log("RES>>>",res?.data?.news);
       } catch (error) {
         console.log(error);
       }
+    }
+
+    // function navigate to show news details
+    const handleCardPress = (id: number) => {
+      navigation.navigate('News Details', {id})
     }
   
   return (
@@ -113,7 +115,9 @@ interface Props {
                 description={item?.short_text}
                 source={item?.image_url}
                 onPress={() => {
-                    getNewsById(item?.id)
+                    // getNewsById(item?.id)
+                    console.log("INITIAL ID>>", item?.id)
+                    handleCardPress(item?.id)
                   }}
                 />
               )}

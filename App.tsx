@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Screens
 import LoginScreen from './src/screens/LoginScreen';
 import NewsScreen from './src/screens/NewsScreen';
+import NewsDetailsScreen from './src/screens/NewsDetailsScreen';
 
 function App(): JSX.Element {
   const Stack = createNativeStackNavigator();
@@ -42,16 +43,23 @@ function App(): JSX.Element {
       }}
      >
       {user ? (
-        <Stack.Screen name="News"
-        options={{
-          headerShown: false,
-          headerTitle: 'News Feed',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-        component={NewsScreen}
-        initialParams={{ action: 'LOGOUT', handleAction: handleLogout }} />
+        <>
+          <Stack.Screen name="News"
+          options={{
+            headerShown: false,
+            headerTitle: 'News Feed',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+          component={NewsScreen}
+          initialParams={{ action: 'LOGOUT', handleAction: handleLogout }} />
+          <Stack.Screen 
+          name="News Details"
+          options={{ title: 'NewsDetails' }}
+          component={NewsDetailsScreen}
+           />
+        </>
         ) : (
         <Stack.Screen name="Login"
         options={{ title: 'Login' }}
