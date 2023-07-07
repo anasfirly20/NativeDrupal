@@ -104,33 +104,33 @@ interface Props {
   
   return (
     <SafeAreaView>
-          <Text style={newsStyle.textHeader}>News Feed</Text>
-          <View style={newsStyle.contentContainer}>
-            <FlatList
-              style={{ paddingHorizontal: 5}}
-              data={news}
-              renderItem={({item}) => (
-                <CardNews
-                title={item?.title}
-                description={item?.short_text}
-                source={item?.image_url}
-                onPress={() => {
-                    // getNewsById(item?.id)
-                    console.log("INITIAL ID>>", item?.id)
-                    handleCardPress(item?.id)
-                  }}
-                />
-              )}
-              ItemSeparatorComponent={() => <View style={{width: 30}} />}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
-            {/* <ButtonCustom
-            styleTO={loginStyle.buttonContainer}
-            styleText={loginStyle.buttonLabel}
-            labelTO="Logout"
-            onPress={handleAction}
-            /> */}
+            <Text style={newsStyle.textHeader}>News Feed</Text>
+            <View style={newsStyle.contentContainer}>
+              <FlatList
+                style={{ paddingHorizontal: 5}}
+                data={news}
+                renderItem={({item}) => (
+                  <CardNews
+                  title={item?.title}
+                  description={item?.short_text}
+                  source={item?.image_url}
+                  onPress={() => {
+                      // getNewsById(item?.id)
+                      console.log("INITIAL ID>>", item?.id)
+                      handleCardPress(item?.id)
+                    }}
+                  />
+                )}
+                ItemSeparatorComponent={() => <View style={{width: 30}} />}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+              {/* <ButtonCustom
+              styleTO={loginStyle.buttonContainer}
+              styleText={loginStyle.buttonLabel}
+              labelTO="Logout"
+              onPress={handleAction}
+              /> */}
     </SafeAreaView>
   )
 }

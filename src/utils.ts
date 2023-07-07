@@ -39,7 +39,29 @@ export const removeAccessToken = async (): Promise<void> => {
   }
 };
 
-// 
+// Filter text
 export const filterText = (text: string) => {
   return text.replace(/<\/?p>/g, '')
 }
+
+// Date format
+export const formatDate = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInSec = Math.floor(diffInMs / 1000);
+
+  switch (true) {
+    case diffInSec < 60:
+      return `${diffInSec} seconds ago`;
+    case diffInSec < 60 * 60:
+      const diffInMin = Math.floor(diffInSec / 60);
+      return `${diffInMin} minutes ago`;
+    case diffInSec < 60 * 60 * 24:
+      const diffInHr = Math.floor(diffInSec / (60 * 60));
+      return `${diffInHr} hours ago`;
+    default:
+      const diffInDay = Math.floor(diffInSec / (60 * 60 * 24));
+      return `${diffInDay} days ago`;
+  }
+};

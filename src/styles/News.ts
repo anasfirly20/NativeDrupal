@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 
 export const newsStyle = StyleSheet.create({
     textHeader: {
-    paddingHorizontal: 18,
+    paddingHorizontal: 20,
     marginBottom: 5,
     fontSize: 35,
     fontWeight: "700"
