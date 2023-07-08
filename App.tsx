@@ -11,7 +11,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import NewsScreen from './src/screens/NewsScreen';
 import NewsDetailsScreen from './src/screens/NewsDetailsScreen';
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
   const Stack = createNativeStackNavigator();
 
   const [user, setUser] = useState<boolean>(false);
@@ -20,7 +20,7 @@ function App(): JSX.Element {
     const getToken = async () => {
       const token = await getAccessToken();
       if(token){
-        setUser(!!token);
+        setUser(true);
       }
     };
     getToken();

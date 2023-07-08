@@ -17,15 +17,13 @@ import {
 
 // Api
 import newsApi from "./news.api";
-import { create } from "apisauce";
 
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
 import { loginStyle } from "../styles/Login";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Utils
-import { getAccessToken, getUID, getClient, filterText } from "../utils";
+import { getAccessToken, getUID, getClient, filterText, getUserData } from "../utils";
 
 // Styles
 import { newsStyle } from "../styles/News";
@@ -33,6 +31,7 @@ import { newsStyle } from "../styles/News";
 // Components
 import ButtonCustom from "../components/ButtonCustom";
 import CardNews from "../components/CardNews";
+import HeaderCustom from "../components/HeaderCustom";
 
 interface Props {
     navigation: NavigationProp<any>;
@@ -48,6 +47,7 @@ interface Props {
       client: ""
     })
     
+    // GET LOCAL STORAGE ITEMS
     const getLocals = async () => {
       const accessToken = await getAccessToken();
       const client = await getClient();
@@ -68,6 +68,7 @@ interface Props {
 
   const [news, setNews] = useState()
   
+  // GET ALL NEWS
   const getAllNews = async () => {
     try {
       const res = await newsApi.getAllNews({
@@ -86,16 +87,6 @@ interface Props {
   useEffect(() => {
     getAllNews()
   }, [])
-  
-    // GET news by id
-    const getNewsById = async ( id : number ) => {
-      try {
-        const res = await newsApi.getNewsById(id)
-        // console.log("RES>>>",res?.data?.news);
-      } catch (error) {
-        console.log(error);
-      }
-    }
 
     // function navigate to show news details
     const handleCardPress = (id: number) => {
@@ -103,34 +94,33 @@ interface Props {
     }
   
   return (
-    <SafeAreaView>
-            <Text style={newsStyle.textHeader}>News Feed</Text>
-            <View style={newsStyle.contentContainer}>
-              <FlatList
-                style={{ paddingHorizontal: 5}}
-                data={news}
-                renderItem={({item}) => (
-                  <CardNews
-                  title={item?.title}
-                  description={item?.short_text}
-                  source={item?.image_url}
-                  onPress={() => {
-                      // getNewsById(item?.id)
-                      console.log("INITIAL ID>>", item?.id)
-                      handleCardPress(item?.id)
-                    }}
-                  />
-                )}
-                ItemSeparatorComponent={() => <View style={{width: 30}} />}
-                showsVerticalScrollIndicator={false}
+    <SafeAreaView style={{flex: 1}}>
+        <ButtonCustom
+          styleTO={loginStyle.buttonContainer}
+          styleText={loginStyle.buttonLabel}
+          labelTO="Logout"
+          onPress={handleAction}
+        />
+        <Text style={newsStyle.textHeader}>News Feed</Text>
+        <View style={newsStyle.contentContainer}>
+          <FlatList
+            style={{ paddingHorizontal: 5}}
+            data={news}
+            renderItem={({item}) => (
+              <CardNews
+              title={item?.title}
+              description={item?.short_text}
+              source={item?.image_url}
+              onPress={() => {
+                  console.log("INITIAL ID>>", item?.id)
+                  handleCardPress(item?.id)
+                }}
               />
-            </View>
-              {/* <ButtonCustom
-              styleTO={loginStyle.buttonContainer}
-              styleText={loginStyle.buttonLabel}
-              labelTO="Logout"
-              onPress={handleAction}
-              /> */}
+            )}
+            ItemSeparatorComponent={() => <View style={{height: 15}} />}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
     </SafeAreaView>
   )
 }

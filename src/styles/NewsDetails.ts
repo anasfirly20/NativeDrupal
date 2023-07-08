@@ -1,8 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const newsDetailsStyle = StyleSheet.create({
+    headerContainer: {
+        paddingHorizontal: 18
+    },
     container: {
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        marginTop: 20
     },
     title: {
         fontWeight: "600",

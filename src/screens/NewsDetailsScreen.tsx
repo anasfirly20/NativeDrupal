@@ -17,13 +17,20 @@ import {
 
 // Api
 import newsApi from "./news.api";
-import { useRoute } from "@react-navigation/native";
+import { NavigationProp, useRoute } from "@react-navigation/native";
 
 // Style
 import { newsDetailsStyle } from "../styles/NewsDetails";
 
 // Utils
 import { filterText, formatDate } from "../utils";
+
+// Components
+import HeaderCustom from "../components/HeaderCustom";
+
+// Miscellaneous
+import { MaterialIcon } from "../components/Icon";
+
 
 // types
 type NewsDetail = {
@@ -34,7 +41,11 @@ type NewsDetail = {
     // Add other properties as needed
 };
 
-const NewsDetailsScreen = () => {
+interface Props {
+    navigation: NavigationProp<any>
+}
+
+const NewsDetailsScreen = ({navigation} : Props) => {
     const route: any = useRoute()
     const {id} = route.params
     
@@ -58,6 +69,9 @@ const NewsDetailsScreen = () => {
 
   return (
     <SafeAreaView>
+       <HeaderCustom 
+       onPress={() => navigation.goBack()}
+       />
       <View style={newsDetailsStyle.container}>
         <Text style={newsDetailsStyle.title}>
             {data?.title}

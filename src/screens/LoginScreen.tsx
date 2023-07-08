@@ -46,7 +46,11 @@ const LoginScreen = ({navigation, route} : Props) => {
         try {
           if (data?.email && data?.password) {
             const res = await newsApi.SignIn(data);
+            console.log(">>>>>",res?.data?.user)
             if (res?.ok) {
+              const userData = res?.data?.user
+              await AsyncStorage.setItem('userData', JSON.stringify(data));
+              
               const headers = res?.headers;
               const accessToken = headers?.["access-token"];
               const uid = headers?.["uid"];

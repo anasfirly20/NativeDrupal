@@ -7,17 +7,17 @@ import { StyleSheet } from "react-native";
 export const newsStyle = StyleSheet.create({
     textHeader: {
     paddingHorizontal: 20,
-    marginBottom: 5,
+    marginBottom: 10,
     fontSize: 35,
     fontWeight: "700"
 
     },
     contentContainer: {
+    flex: 1,
     alignItems: "center",
   },
   cardContainer: {
     flexDirection: "row",
-    marginVertical: 10,
     gap: 20,
     height: 160,
     width: 400,
