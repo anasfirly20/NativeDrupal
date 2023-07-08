@@ -1,17 +1,8 @@
 import {
-    Button,
-    TextInput,
-    TouchableOpacity,
     Text,
-    ActivityIndicator,
     View,
-    KeyboardAvoidingView,
-    Alert,
     Image,
     SafeAreaView,
-    ScrollView,
-    Pressable,
-    FlatList
   } from "react-native";
   import React, {useState, useEffect} from "react";
 
@@ -28,18 +19,8 @@ import { filterText, formatDate } from "../utils";
 // Components
 import HeaderCustom from "../components/HeaderCustom";
 
-// Miscellaneous
-import { MaterialIcon } from "../components/Icon";
-
-
-// types
-type NewsDetail = {
-    title: string;
-    created_at: any;
-    image_url: string;
-    short_text: string
-    // Add other properties as needed
-};
+// Types
+import { INewsDetail } from "../types/types";
 
 interface Props {
     navigation: NavigationProp<any>
@@ -49,7 +30,7 @@ const NewsDetailsScreen = ({navigation} : Props) => {
     const route: any = useRoute()
     const {id} = route.params
     
-    const [data, setData] = useState<NewsDetail>()
+    const [data, setData] = useState<INewsDetail>()
 
     // Get news by id
     const getNewsById = async (id: number) => {
@@ -63,7 +44,6 @@ const NewsDetailsScreen = ({navigation} : Props) => {
     }
     
     useEffect(() => {
-        console.log("ID VTOROI >>", id);
         getNewsById(id)
     }, [])
 

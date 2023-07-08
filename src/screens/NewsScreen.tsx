@@ -22,12 +22,12 @@ import CardNews from "../components/CardNews";
 import HeaderCustom from "../components/HeaderCustom";
 
 // Types
-import { Props, UserData } from "../types/NewsScreen";
+import { IProps, IUserData } from "../types/types";
 
 // Miscellaneous
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const NewsScreen = ({ navigation, route }: Props) => {
+const NewsScreen = ({ navigation, route }: IProps) => {
   const { handleAction } = route.params;
 
   const [data, setData] = useState({
@@ -36,7 +36,7 @@ const NewsScreen = ({ navigation, route }: Props) => {
     client: "",
   });
 
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<IUserData | null>(null);
 
   // GET LOCAL STORAGE ITEMS
   const getLocals = async () => {
