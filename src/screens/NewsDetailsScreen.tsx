@@ -70,6 +70,7 @@ const NewsDetailsScreen = ({navigation} : Props) => {
   return (
     <SafeAreaView>
        <HeaderCustom 
+       name="arrow-left"
        onPress={() => navigation.goBack()}
        />
       <View style={newsDetailsStyle.container}>
@@ -87,7 +88,7 @@ const NewsDetailsScreen = ({navigation} : Props) => {
             </View>
             <View style={newsDetailsStyle.descContainer}>
             <Text style={newsDetailsStyle.descText}>
-                {data?.short_text && filterText(data?.short_text)}.
+                {data?.short_text && filterText(data?.short_text)}
             </Text>
             </View>
       </View>

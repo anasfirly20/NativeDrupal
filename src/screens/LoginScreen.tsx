@@ -30,10 +30,6 @@ interface Props {
     route: any
   }
 
-  const api = create({
-    baseURL: "https://lzone.secret-agents.ru/api/v2"
-  })
-
 const LoginScreen = ({navigation, route} : Props) => {
     const { handleAction } = route.params;
     
@@ -46,7 +42,7 @@ const LoginScreen = ({navigation, route} : Props) => {
         try {
           if (data?.email && data?.password) {
             const res = await newsApi.SignIn(data);
-            console.log(">>>>>",res?.data?.user)
+            console.log("RES >>>",res?.data?.user)
             if (res?.ok) {
               const userData = res?.data?.user
               await AsyncStorage.setItem('userData', JSON.stringify(data));

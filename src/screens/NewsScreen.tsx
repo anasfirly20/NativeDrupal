@@ -95,13 +95,14 @@ interface Props {
   
   return (
     <SafeAreaView style={{flex: 1}}>
-        <ButtonCustom
-          styleTO={loginStyle.buttonContainer}
-          styleText={loginStyle.buttonLabel}
-          labelTO="Logout"
+        <View style={{flexDirection: "row", justifyContent: "space-between" ,alignItems: "center", paddingHorizontal: 10}}>
+          <Text style={newsStyle.textHeader}>News Feed</Text>
+          <HeaderCustom
+          label="Logout"
+          name="logout"
           onPress={handleAction}
-        />
-        <Text style={newsStyle.textHeader}>News Feed</Text>
+          />
+        </View>
         <View style={newsStyle.contentContainer}>
           <FlatList
             style={{ paddingHorizontal: 5}}

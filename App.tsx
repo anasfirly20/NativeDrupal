@@ -21,6 +21,10 @@ const App = (): JSX.Element => {
       const token = await getAccessToken();
       if(token){
         setUser(true);
+        console.log("THERE IS TOKEN >>>", token)
+      } else {
+        console.log("NO TOKEN");
+        123
       }
     };
     getToken();
@@ -53,7 +57,8 @@ const App = (): JSX.Element => {
             },
           }}
           component={NewsScreen}
-          initialParams={{ action: 'LOGOUT', handleAction: handleLogout }} />
+          initialParams={{ action: 'LOGOUT', handleAction: handleLogout }} 
+          />
           <Stack.Screen 
           name="News Details"
           options={{ title: 'NewsDetails' }}
@@ -64,7 +69,8 @@ const App = (): JSX.Element => {
         <Stack.Screen name="Login"
         options={{ title: 'Login' }}
         component={LoginScreen}
-        initialParams={{ action: 'LOGIN_SUCCESS', handleAction: handleLoginSuccess }} />
+        initialParams={{ action: 'LOGIN_SUCCESS', handleAction: handleLoginSuccess }} 
+        />
       )}
      </Stack.Navigator>
    </NavigationContainer>
