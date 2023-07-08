@@ -58,11 +58,6 @@ const NewsScreen = ({ navigation, route }: IProps) => {
     }
   };
 
-  useEffect(() => {
-    getLocals();
-    getAllNews();
-  }, []);
-
   // NEWS
   const [news, setNews] = useState<Array<any>>([]);
 
@@ -80,7 +75,12 @@ const NewsScreen = ({ navigation, route }: IProps) => {
       console.log(error);
     }
   };
-
+  
+  useEffect(() => {
+    getLocals();
+    getAllNews();
+  }, []);
+  
   // function navigate to show news details
   const handleCardPress = (id: number) => {
     navigation.navigate("NewsDetails", { id });
