@@ -1,18 +1,38 @@
 import { StyleSheet } from "react-native";
 
-// borderWidth: 2,
-// borderColor: "red",
-
 
 export const newsStyle = StyleSheet.create({
-    textHeader: {
+  profileContainer: {
     paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  profileData: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 50
+  },
+  profileDetails: {
+    flexDirection: "column",
+    alignItems: "flex-start"
+  },
+  profileName: {
+    fontSize: 18,
+    fontWeight: "600"
+  },
+  textHeader: {
+    paddingHorizontal: 20,
+    marginTop: 10,
     marginBottom: 10,
     fontSize: 35,
     fontWeight: "700"
-
-    },
-    contentContainer: {
+  },
+  contentContainer: {
     flex: 1,
     alignItems: "center",
   },

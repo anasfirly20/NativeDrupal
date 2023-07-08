@@ -45,7 +45,7 @@ const LoginScreen = ({navigation, route} : Props) => {
             console.log("RES >>>",res?.data?.user)
             if (res?.ok) {
               const userData = res?.data?.user
-              await AsyncStorage.setItem('userData', JSON.stringify(data));
+              await AsyncStorage.setItem('userData', JSON.stringify(userData));
               
               const headers = res?.headers;
               const accessToken = headers?.["access-token"];

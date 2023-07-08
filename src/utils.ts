@@ -47,7 +47,7 @@ export const getUserData = async (): Promise<void> => {
     console.log(error);
     
   }
-} 
+}
 
 // Filter text
 export const filterText = (text: string) => {

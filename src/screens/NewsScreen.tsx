@@ -20,7 +20,7 @@ import newsApi from "./news.api";
 
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
-import { loginStyle } from "../styles/Login";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Utils
 import { getAccessToken, getUID, getClient, filterText, getUserData } from "../utils";
@@ -37,6 +37,12 @@ interface Props {
     navigation: NavigationProp<any>;
     route: any
   }
+
+  interface UserData {
+    username: string;
+    avatar_url: string
+    // add other properties as needed
+  }
   
   const NewsScreen = ({navigation, route}: Props) => {
     const { handleAction } = route.params;
@@ -46,6 +52,8 @@ interface Props {
       uid: "",
       client: ""
     })
+    
+    const [userData, setUserData] = useState<UserData | null>(null);
     
     // GET LOCAL STORAGE ITEMS
     const getLocals = async () => {
@@ -59,13 +67,22 @@ interface Props {
         client: client || "",
         uid: uid || "",
       });
+
+      const userDataString = await AsyncStorage.getItem('userData');
+      if (userDataString) {
+        const userData = JSON.parse(userDataString);
+        setUserData(userData);
+      }
     };
     
-
-  useEffect(() => {
-    getLocals()
-  },[])
-
+    
+    useEffect(() => {
+      getLocals()
+      getAllNews()
+    },[])
+    
+    // console.log("DATA >>>>", userData)
+    
   const [news, setNews] = useState()
   
   // GET ALL NEWS
@@ -84,10 +101,6 @@ interface Props {
     }
   }
   
-  useEffect(() => {
-    getAllNews()
-  }, [])
-
     // function navigate to show news details
     const handleCardPress = (id: number) => {
       navigation.navigate('News Details', {id})
@@ -95,33 +108,39 @@ interface Props {
   
   return (
     <SafeAreaView style={{flex: 1}}>
-        <View style={{flexDirection: "row", justifyContent: "space-between" ,alignItems: "center", paddingHorizontal: 10}}>
-          <Text style={newsStyle.textHeader}>News Feed</Text>
-          <HeaderCustom
-          label="Logout"
-          name="logout"
-          onPress={handleAction}
+      <View style={newsStyle.profileContainer}>
+        <View style={newsStyle.profileData}>
+          <Image source={{uri: userData?.avatar_url}}
+          style={newsStyle.profileImage}
           />
+            <Text style={newsStyle.profileName}>{userData?.username}</Text>
         </View>
-        <View style={newsStyle.contentContainer}>
-          <FlatList
-            style={{ paddingHorizontal: 5}}
-            data={news}
-            renderItem={({item}) => (
-              <CardNews
-              title={item?.title}
-              description={item?.short_text}
-              source={item?.image_url}
-              onPress={() => {
-                  console.log("INITIAL ID>>", item?.id)
-                  handleCardPress(item?.id)
-                }}
-              />
-            )}
-            ItemSeparatorComponent={() => <View style={{height: 15}} />}
-            showsVerticalScrollIndicator={false}
-          />
-        </View>
+        <HeaderCustom
+        label="Logout"
+        name="logout"
+        onPress={handleAction}
+        />
+      </View>
+      <Text style={newsStyle.textHeader}>News Feed</Text>
+      <View style={newsStyle.contentContainer}>
+        <FlatList
+          style={{ paddingHorizontal: 5}}
+          data={news}
+          renderItem={({item}) => (
+            <CardNews
+            title={item?.title}
+            description={item?.short_text}
+            source={item?.image_url}
+            onPress={() => {
+                console.log("INITIAL ID>>", item?.id)
+                handleCardPress(item?.id)
+              }}
+            />
+          )}
+          ItemSeparatorComponent={() => <View style={{height: 15}} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
     </SafeAreaView>
   )
 }
