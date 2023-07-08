@@ -25,7 +25,7 @@ export const newsStyle = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 18,
     borderRadius: 20,
-    shadowOffset: {width: 4, height: 4},  
+    shadowOffset: {width: 1, height: 4},  
     shadowColor: '#171717',  
     shadowOpacity: 0.2,  
     shadowRadius: 3,  

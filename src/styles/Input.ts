@@ -1,13 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const inputStyle = StyleSheet.create({
-    container: {
-        // backgroundColor: "#F2F4F6",
-    },
-    // label: {
-    //     fontSize: 20,
-    //     color: "black"
-    //   },
     inputContainer: {
         marginTop: 25,
         flexDirection: "row",
