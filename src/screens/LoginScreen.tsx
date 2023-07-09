@@ -29,17 +29,16 @@ import newsApi from "./news.api";
 // Types
 import { ILoginFormData } from "../types/types";
 
-interface Props {
+interface IProps {
     navigation: NavigationProp<any>;
     route: any
   }
 
-const LoginScreen = ({navigation, route} : Props) => {
+const LoginScreen = ({navigation, route} : IProps) => {
     const { handleAction } = route.params;
-    
     const [data, setData] = useState<ILoginFormData>({
-        email: "",
-        password: ""
+      email: "",
+      password: ""
     })
 
     const handleLogin = async () => {
@@ -77,33 +76,33 @@ const LoginScreen = ({navigation, route} : Props) => {
 return (
   <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={loginStyle.container}>
+      <View>
         <View>
-            <View>
-            <Image source={require('../assets/login.png')} style={loginStyle.img} />
-            </View>
-            <View style={loginStyle.content}>
-                <Text style={loginStyle.textHeader}>
-                    Login
-                </Text>
-                <Input 
-                  placeholder="Email ID"
-                  keyboardType="email-address"
-                  onChangeText={(e: string) => setData({...data, email: e})}
-                  />
-                <Input 
-                  placeholder="Password" 
-                  onChangeText={(e: string) => setData({...data, password: e})}
-                  secureTextEntry={true}
-                  />
-                <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
-                <ButtonCustom
-                  styleTO={loginStyle.buttonContainer}
-                  styleText={loginStyle.buttonLabel}
-                  labelTO="Login"
-                  onPress={handleLogin}
-                  />
-            </View>
+          <Image source={require('../assets/login.png')} style={loginStyle.img} />
         </View>
+        <View style={loginStyle.content}>
+          <Text style={loginStyle.textHeader}>
+              Login
+          </Text>
+          <Input
+            placeholder="Email ID"
+            keyboardType="email-address"
+            onChangeText={(e: string) => setData({...data, email: e})}
+            />
+          <Input
+            placeholder="Password"
+            onChangeText={(e: string) => setData({...data, password: e})}
+            secureTextEntry={true}
+            />
+          <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
+          <ButtonCustom
+            styleTO={loginStyle.buttonContainer}
+            styleText={loginStyle.buttonLabel}
+            labelTO="Login"
+            onPress={handleLogin}
+            />
+        </View>
+      </View>
     </SafeAreaView>
   </TouchableWithoutFeedback>
   )

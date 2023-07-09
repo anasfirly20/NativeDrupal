@@ -22,11 +22,11 @@ import HeaderCustom from "../components/HeaderCustom";
 // Types
 import { INewsDetail } from "../types/types";
 
-interface Props {
+interface IProps {
     navigation: NavigationProp<any>
 }
 
-const NewsDetailsScreen = ({navigation} : Props) => {
+const NewsDetailsScreen = ({navigation} : IProps) => {
     const route: any = useRoute()
     const {id} = route.params
     
