@@ -82,10 +82,11 @@ const NewsScreen = ({ navigation, route }: IProps) => {
   };
   
   useEffect(() => {
-    getLocals();
-    if(data){
-      getAllNews();
-    }
+    const getData = async () => {
+      await getLocals();
+      await getAllNews();
+    };
+    getData();
   }, []);
 
   // function navigate to show news details
