@@ -34,13 +34,13 @@ export const newsStyle = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingHorizontal: 10,
+    // paddingHorizontal: 20,
     // alignItems: "center",
   },
   cardContainer: {
     flexDirection: "row",
-    gap: 20,
-    width: "100%",
+    alignSelf: "center",
+    width: "95%",
     height: 150,
     backgroundColor: "white",
     // aspectRatio: 16/6,
@@ -49,7 +49,7 @@ export const newsStyle = StyleSheet.create({
     borderRadius: 20,
     shadowOffset: {width: 1, height: 4},  
     shadowColor: '#171717',  
-    shadowOpacity: 0.2,  
+    shadowOpacity: 0.3,  
     shadowRadius: 3,  
 
   },

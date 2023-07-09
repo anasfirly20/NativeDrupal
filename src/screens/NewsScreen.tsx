@@ -70,7 +70,6 @@ const NewsScreen = ({ navigation, route }: IProps) => {
   // GET ALL NEWS
   const getAllNews = async () => {
     try {
-      console.log("TRIGGER")
       const res = await newsApi.getAllNews({
         "access-token": data?.["access-token"],
         client: data?.client,
@@ -114,7 +113,6 @@ const NewsScreen = ({ navigation, route }: IProps) => {
       <Text style={newsStyle.textHeader}>News Feed</Text>
       <View style={newsStyle.contentContainer}>
         <FlatList
-          // style={{ paddingHorizontal: 5 }}
           data={news}
           renderItem={({ item }) => (
             <CardNews

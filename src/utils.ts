@@ -78,5 +78,5 @@ export const formatDate = (dateStr: string): string => {
 
 // Text ellipsis
 export const textEllipsis = (text: string): string => {
-  return text.length < 35 ? `${text}` : `${text.substring(0, 30)}...`;
+  return text.length < 35 ? `${text}` : `${text.substring(0, 15)}...`;
 };
