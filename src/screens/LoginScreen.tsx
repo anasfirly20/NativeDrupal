@@ -5,7 +5,11 @@ import {
   View,
   Image,
   SafeAreaView,
-  Alert
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 
 // Styles
@@ -71,6 +75,7 @@ const LoginScreen = ({navigation, route} : Props) => {
 
     
 return (
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={loginStyle.container}>
         <View>
             <View>
@@ -84,23 +89,24 @@ return (
                   placeholder="Email ID"
                   keyboardType="email-address"
                   onChangeText={(e: string) => setData({...data, email: e})}
-                />
+                  />
                 <Input 
                   placeholder="Password" 
                   onChangeText={(e: string) => setData({...data, password: e})}
                   secureTextEntry={true}
-                />
+                  />
                 <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
                 <ButtonCustom
                   styleTO={loginStyle.buttonContainer}
                   styleText={loginStyle.buttonLabel}
                   labelTO="Login"
                   onPress={handleLogin}
-                />
+                  />
             </View>
         </View>
     </SafeAreaView>
-    )
+  </TouchableWithoutFeedback>
+  )
 }
 
 export default LoginScreen;

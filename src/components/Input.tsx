@@ -12,7 +12,6 @@ import { inputStyle } from "../styles/Input";
 
 //
 interface Props {
-  // label: string,
   placeholder: string,
   onChangeText: (text: string) => void,
   secureTextEntry? : boolean,
@@ -20,7 +19,6 @@ interface Props {
 }
 
 const Input = ({
-    // label,
     placeholder,
     onChangeText,
     secureTextEntry,
@@ -28,9 +26,9 @@ const Input = ({
  } : Props) => {
   return (
     <View style={inputStyle.inputContainer}>
-        {/* <Text>{label}</Text> */}
         <TextInput 
-        placeholder={placeholder} 
+        placeholder={placeholder}
+        placeholderTextColor="#999" 
         style={inputStyle.input}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
