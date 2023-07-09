@@ -83,7 +83,9 @@ const NewsScreen = ({ navigation, route }: IProps) => {
   
   useEffect(() => {
     getLocals();
-    getAllNews();
+    if(data){
+      getAllNews();
+    }
   }, []);
 
   // function navigate to show news details
