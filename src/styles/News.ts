@@ -4,8 +4,10 @@ import { StyleSheet } from "react-native";
 export const newsStyle = StyleSheet.create({
   profileContainer: {
     paddingHorizontal: 20,
+    marginTop: 10,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   profileData: {
     flexDirection: "row",
@@ -34,8 +36,6 @@ export const newsStyle = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    // paddingHorizontal: 20,
-    // alignItems: "center",
   },
   cardContainer: {
     flexDirection: "row",
@@ -43,7 +43,6 @@ export const newsStyle = StyleSheet.create({
     width: "95%",
     height: 150,
     backgroundColor: "white",
-    // aspectRatio: 16/6,
     paddingVertical: 20,
     paddingHorizontal: 18,
     borderRadius: 20,
