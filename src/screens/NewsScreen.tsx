@@ -70,6 +70,7 @@ const NewsScreen = ({ navigation, route }: IProps) => {
   // GET ALL NEWS
   const getAllNews = async () => {
     try {
+      console.log("TRIGGER")
       const res = await newsApi.getAllNews({
         "access-token": data?.["access-token"],
         client: data?.client,
@@ -86,22 +87,20 @@ const NewsScreen = ({ navigation, route }: IProps) => {
     getLocals();
     getAllNews();
   }, []);
-  
+
   // function navigate to show news details
   const handleCardPress = (id: number) => {
     navigation.navigate("NewsDetails", { id });
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1}}>
       <View style={newsStyle.profileContainer}>
         <View style={newsStyle.profileData}>
-          <TouchableOpacity onPress={handleAction}>
             <Image
               source={{ uri: userData?.avatar_url }}
               style={newsStyle.profileImage}
             />
-          </TouchableOpacity>
           <Text style={newsStyle.profileName}>
             {userData?.username && userData?.username}
           </Text>
@@ -115,7 +114,7 @@ const NewsScreen = ({ navigation, route }: IProps) => {
       <Text style={newsStyle.textHeader}>News Feed</Text>
       <View style={newsStyle.contentContainer}>
         <FlatList
-          style={{ paddingHorizontal: 5 }}
+          // style={{ paddingHorizontal: 5 }}
           data={news}
           renderItem={({ item }) => (
             <CardNews

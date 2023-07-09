@@ -75,3 +75,8 @@ export const formatDate = (dateStr: string): string => {
       return `${diffInDay} days ago`;
   }
 };
+
+// Text ellipsis
+export const textEllipsis = (text: string): string => {
+  return text.length < 35 ? `${text}` : `${text.substring(0, 30)}...`;
+};

@@ -5,7 +5,7 @@ import React from 'react'
 import { newsStyle } from '../styles/News'
 
 // Utils
-import { filterText } from '../utils'
+import { filterText, textEllipsis } from '../utils'
 
 // types
 interface Props {
@@ -14,6 +14,8 @@ interface Props {
     source: string;
     onPress?: () => void; 
   }
+
+
   
 
 const CardNews = ({title, description, source, onPress }: Props) => {
@@ -24,7 +26,7 @@ const CardNews = ({title, description, source, onPress }: Props) => {
         <View style={newsStyle.cardContainer}>
         <View style={newsStyle.descContainer}>
         <Text style={newsStyle.descTextHeader}>{title}</Text>
-        <Text style={newsStyle.descText}>{description && filterText(description)}</Text>
+        <Text style={newsStyle.descText}>{description && filterText(textEllipsis(description))}</Text>
         </View>
         <Image source={{ uri: source }} style={newsStyle.cardImage} />
           </View>

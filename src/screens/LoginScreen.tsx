@@ -35,6 +35,8 @@ interface IProps {
   }
 
 const LoginScreen = ({navigation, route} : IProps) => {
+  const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
+  
     const { handleAction } = route.params;
     const [data, setData] = useState<ILoginFormData>({
       email: "",
@@ -84,23 +86,28 @@ return (
           <Text style={loginStyle.textHeader}>
               Login
           </Text>
-          <Input
-            placeholder="Email ID"
-            keyboardType="email-address"
-            onChangeText={(e: string) => setData({...data, email: e})}
-            />
-          <Input
-            placeholder="Password"
-            onChangeText={(e: string) => setData({...data, password: e})}
-            secureTextEntry={true}
-            />
-          <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
-          <ButtonCustom
-            styleTO={loginStyle.buttonContainer}
-            styleText={loginStyle.buttonLabel}
-            labelTO="Login"
-            onPress={handleLogin}
-            />
+          <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              keyboardVerticalOffset={keyboardVerticalOffset}
+              >
+            <Input
+              placeholder="Email ID"
+              keyboardType="email-address"
+              onChangeText={(e: string) => setData({...data, email: e})}
+              />
+            <Input
+              placeholder="Password"
+              onChangeText={(e: string) => setData({...data, password: e})}
+              secureTextEntry={true}
+              />
+            <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
+            <ButtonCustom
+              styleTO={loginStyle.buttonContainer}
+              styleText={loginStyle.buttonLabel}
+              labelTO="Login"
+              onPress={handleLogin}
+              />
+          </KeyboardAvoidingView>
         </View>
       </View>
     </SafeAreaView>

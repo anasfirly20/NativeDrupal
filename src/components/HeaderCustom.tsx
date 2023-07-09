@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { MaterialIcon } from './Icon'
 
 interface Props {
@@ -11,11 +11,12 @@ const HeaderCustom = ({name, label, onPress} : Props) => {
   return (
     <View style={{paddingHorizontal: 10, flexDirection: "row", alignItems: "center", gap:5}}>
             <Text style={{fontWeight: "600", fontSize: 15}}>{label}</Text>
-            <Pressable
-           onPress={onPress}
+            <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={onPress}
             >
                 <MaterialIcon size="large" color="black" name={name} />
-            </Pressable>
+            </TouchableOpacity>
         </View>
   )
 }
