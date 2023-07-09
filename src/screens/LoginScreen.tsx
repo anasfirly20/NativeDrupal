@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import {
-  TouchableOpacity,
   Text,
   View,
   Image,
@@ -14,7 +13,6 @@ import { loginStyle } from "../styles/Login";
 
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
-import { create } from "apisauce";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components
@@ -24,7 +22,9 @@ import ButtonCustom from "../components/ButtonCustom";
 // Api
 import newsApi from "./news.api";
 
-// 
+// Types
+import { ILoginFormData } from "../types/types";
+
 interface Props {
     navigation: NavigationProp<any>;
     route: any
@@ -33,7 +33,7 @@ interface Props {
 const LoginScreen = ({navigation, route} : Props) => {
     const { handleAction } = route.params;
     
-    const [data, setData] = useState({
+    const [data, setData] = useState<ILoginFormData>({
         email: "",
         password: ""
     })

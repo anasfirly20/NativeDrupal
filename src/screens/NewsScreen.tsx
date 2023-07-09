@@ -27,10 +27,16 @@ import { IProps, IUserData } from "../types/types";
 // Miscellaneous
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+interface IData {
+  "access-token": string;
+  uid: string;
+  client: string;
+}
+
 const NewsScreen = ({ navigation, route }: IProps) => {
   const { handleAction } = route.params;
 
-  const [data, setData] = useState({
+  const [data, setData] = useState<IData>({
     "access-token": "",
     uid: "",
     client: "",

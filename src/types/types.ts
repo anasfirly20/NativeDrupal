@@ -13,10 +13,13 @@ export interface IUserData {
     username: string;
     avatar_url: string;
   }
-
 export interface INewsDetail {
   title: string,
   created_at: any,
   image_url: string,
   short_text: string
 };
+export interface ILoginFormData {
+  email: string;
+  password: string;
+}
