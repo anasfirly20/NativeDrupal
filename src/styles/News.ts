@@ -54,7 +54,7 @@ export const newsStyle = StyleSheet.create({
   },
   descContainer: {
     flex: 1,
-    gap: 8
+    gap: 10
   },
   descTextHeader: {
     color: "#222222",

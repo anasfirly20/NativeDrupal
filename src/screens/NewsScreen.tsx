@@ -4,7 +4,6 @@ import {
   Image,
   SafeAreaView,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
@@ -96,10 +95,10 @@ const NewsScreen = ({ navigation, route }: IProps) => {
     <SafeAreaView style={{ flex: 1}}>
       <View style={newsStyle.profileContainer}>
         <View style={newsStyle.profileData}>
-            <Image
-              source={{ uri: userData?.avatar_url }}
-              style={newsStyle.profileImage}
-            />
+          <Image
+            source={{ uri: userData?.avatar_url }}
+            style={newsStyle.profileImage}
+          />
           <Text style={newsStyle.profileName}>
             {userData?.username && userData?.username}
           </Text>

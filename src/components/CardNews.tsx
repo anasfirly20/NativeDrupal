@@ -15,21 +15,18 @@ interface Props {
     onPress?: () => void; 
   }
 
-
-  
-
 const CardNews = ({title, description, source, onPress }: Props) => {
   return (
     <Pressable
     onPress={onPress}
     >
-        <View style={newsStyle.cardContainer}>
+      <View style={newsStyle.cardContainer}>
         <View style={newsStyle.descContainer}>
-        <Text style={newsStyle.descTextHeader}>{title}</Text>
-        <Text style={newsStyle.descText}>{description && filterText(textEllipsis(description))}</Text>
+          <Text style={newsStyle.descTextHeader}>{title}</Text>
+          <Text style={newsStyle.descText}>{description && filterText(textEllipsis(description))}</Text>
         </View>
         <Image source={{ uri: source }} style={newsStyle.cardImage} />
-          </View>
+      </View>
     </Pressable>
   )
 }
