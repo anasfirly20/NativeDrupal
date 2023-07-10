@@ -70,6 +70,14 @@ const NewsScreen = ({ navigation }: IProps) => {
     }
   };
 
+  useEffect(() => {
+    console.log("EXECUTED")
+    if(data){
+      getAllNews()
+    }
+    getLocals()
+  },[data?.["access-token"]])
+
   // NEWS
   const [news, setNews] = useState<Array<any>>([]);
 
@@ -88,13 +96,14 @@ const NewsScreen = ({ navigation }: IProps) => {
     }
   };
   
-  useEffect(() => {
-    const getData = async () => {
-      await getLocals();
-      await getAllNews();
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await getLocals();
+  //     await getAllNews();
+  //   };
+  //   getData();
+  // }, []);
+
   
   // function navigate to show news details
   const handleCardPress = (id: number) => {
