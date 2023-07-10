@@ -54,17 +54,19 @@ export const newsStyle = StyleSheet.create({
   },
   descContainer: {
     flex: 1,
-    gap: 10
+    gap: 10,
   },
   descTextHeader: {
     color: "#222222",
     fontSize: 20,
     fontWeight: "700",
+    paddingRight: 30
   },
   descText: {
     color: "#767676",
     fontSize: 14,
-    fontWeight: "600"
+    fontWeight: "600",
+    paddingRight: 30
   },
   cardImage: {
     flex: 0.5,
