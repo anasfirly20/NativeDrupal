@@ -15,10 +15,6 @@ import {
 // Styles
 import { loginStyle } from "../styles/Login";
 
-// Miscellaneous
-import { NavigationProp } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 // Components
 import Input from "../components/Input";
 import ButtonCustom from "../components/ButtonCustom";
@@ -29,50 +25,55 @@ import newsApi from "./news.api";
 // Types
 import { ILoginFormData } from "../types/types";
 
+// Miscellaneous
+import { NavigationProp } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
+
 interface IProps {
     navigation: NavigationProp<any>;
-    route: any
+    // route: any
   }
 
-const LoginScreen = ({navigation, route} : IProps) => {
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
+const LoginScreen = ({navigation} : IProps) => {
+  const dispatch = useDispatch();
   
-    const { handleAction } = route.params;
-    const [data, setData] = useState<ILoginFormData>({
-      email: "",
-      password: ""
-    })
+  const [data, setData] = useState<ILoginFormData>({
+    email: "",
+    password: ""
+  })
 
-    const handleLogin = async () => {
-        try {
-          if (data?.email && data?.password) {
-            const res = await newsApi.SignIn(data);
-            if (res?.ok) {
-              const userData = res?.data?.user
-              await AsyncStorage.setItem('userData', JSON.stringify(userData));
-              
-              const headers = res?.headers;
-              const accessToken = headers?.["access-token"];
-              const uid = headers?.["uid"];
-              const client = headers?.["client"];
-              if (accessToken && uid && client) {
-                await AsyncStorage.multiSet([
-                  ["access-token", accessToken],
-                  ["uid", uid],
-                  ["client", client],
-                ]);
-              }
-              handleAction();
-            } else {
-              Alert.alert("Login failed");
+  const handleLogin = async () => {
+      try {
+        if (data?.email && data?.password) {
+          const res = await newsApi.SignIn(data);
+          if (res?.ok) {
+            const userData = res?.data?.user
+            await AsyncStorage.setItem('userData', JSON.stringify(userData));
+            
+            const headers = res?.headers;
+            const accessToken = headers?.["access-token"];
+            const uid = headers?.["uid"];
+            const client = headers?.["client"];
+            if (accessToken && uid && client) {
+              await AsyncStorage.multiSet([
+                ["access-token", accessToken],
+                ["uid", uid],
+                ["client", client],
+              ]);
             }
+            dispatch(login())
           } else {
-            Alert.alert("Missing Email / Password");
+            Alert.alert("Login failed");
           }
-        } catch (err) {
-          Alert.alert("Error", "An error occurred while logging in.");
+        } else {
+          Alert.alert("Missing Email / Password");
         }
-      };
+      } catch (err) {
+        Alert.alert("Error", "An error occurred while logging in.");
+      }
+    };
 
     
 return (
@@ -86,10 +87,6 @@ return (
           <Text style={loginStyle.textHeader}>
               Login
           </Text>
-          <KeyboardAvoidingView
-              behavior={Platform.OS === "ios" ? "padding" : "height"}
-              keyboardVerticalOffset={keyboardVerticalOffset}
-              >
             <Input
               placeholder="Email ID"
               keyboardType="email-address"
@@ -107,7 +104,6 @@ return (
               labelTO="Login"
               onPress={handleLogin}
               />
-          </KeyboardAvoidingView>
         </View>
       </View>
     </SafeAreaView>

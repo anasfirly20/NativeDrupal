@@ -6,18 +6,20 @@ import {
   } from "react-native";
   import React, {useState, useEffect} from "react";
 
+// Components
+import HeaderCustom from "../components/HeaderCustom";
+
+// Styles
+import { newsDetailsStyle } from "../styles/NewsDetails";
+
 // Api
 import newsApi from "./news.api";
-import { NavigationProp, useRoute } from "@react-navigation/native";
-
-// Style
-import { newsDetailsStyle } from "../styles/NewsDetails";
 
 // Utils
 import { filterText, formatDate } from "../utils";
 
-// Components
-import HeaderCustom from "../components/HeaderCustom";
+// Miscellaneous
+import { NavigationProp, useRoute } from "@react-navigation/native";
 
 // Types
 import { INewsDetail } from "../types/types";

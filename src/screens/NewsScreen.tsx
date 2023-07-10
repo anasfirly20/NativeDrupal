@@ -7,24 +7,26 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
-// Api
-import newsApi from "./news.api";
-
-// Utils
-import { getAccessToken, getUID, getClient } from "../utils";
-
-// Styles
-import { newsStyle } from "../styles/News";
-
 // Components
 import CardNews from "../components/CardNews";
 import HeaderCustom from "../components/HeaderCustom";
 
-// Types
-import { IProps, IUserData } from "../types/types";
+// Styles
+import { newsStyle } from "../styles/News";
+
+// Api
+import newsApi from "./news.api";
+
+// Utils
+import { getAccessToken, getUID, getClient, removeAccessToken } from "../utils";
 
 // Miscellaneous
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from 'react-redux';
+import { logout } from "../redux/authSlice";
+
+// Types
+import { IProps, IUserData } from "../types/types";
 
 interface IData {
   "access-token": string;
@@ -32,8 +34,13 @@ interface IData {
   client: string;
 }
 
-const NewsScreen = ({ navigation, route }: IProps) => {
-  const { handleAction } = route.params;
+const NewsScreen = ({ navigation }: IProps) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    await removeAccessToken()
+    dispatch(logout());
+  };
 
   const [data, setData] = useState<IData>({
     "access-token": "",
@@ -88,7 +95,7 @@ const NewsScreen = ({ navigation, route }: IProps) => {
     };
     getData();
   }, []);
-
+  
   // function navigate to show news details
   const handleCardPress = (id: number) => {
     navigation.navigate("NewsDetails", { id });
@@ -109,7 +116,7 @@ const NewsScreen = ({ navigation, route }: IProps) => {
         <HeaderCustom
           label="Logout"
           name="logout"
-          onPress={handleAction}
+          onPress={handleLogout}
         />
       </View>
       <Text style={newsStyle.textHeader}>News Feed</Text>
