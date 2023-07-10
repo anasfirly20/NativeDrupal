@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 // Components
 import CardNews from "../components/CardNews";
@@ -52,9 +52,19 @@ const NewsScreen = ({ navigation }: IProps) => {
 
   // GET LOCAL STORAGE ITEMS
   const getLocals = async () => {
-    const accessToken = await getAccessToken();
-    const client = await getClient();
-    const uid = await getUID();
+    const [accessToken, client, uid] = await Promise.all([
+      getAccessToken(),
+      getClient(),
+      getUID(),
+    ]);
+
+    if (
+      accessToken === data?.["access-token"] &&
+      client === data?.client &&
+      uid === data?.uid
+    ) {
+      return;
+    }
 
     setData({
       ...data,
@@ -76,7 +86,7 @@ const NewsScreen = ({ navigation }: IProps) => {
       getAllNews()
     }
     getLocals()
-  },[data?.["access-token"]])
+  },[data])
 
   // NEWS
   const [news, setNews] = useState<Array<any>>([]);
@@ -95,15 +105,6 @@ const NewsScreen = ({ navigation }: IProps) => {
       console.log(error);
     }
   };
-  
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     await getLocals();
-  //     await getAllNews();
-  //   };
-  //   getData();
-  // }, []);
-
   
   // function navigate to show news details
   const handleCardPress = (id: number) => {
