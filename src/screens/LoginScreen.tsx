@@ -8,7 +8,6 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
   Platform
 } from "react-native";
 
@@ -32,6 +31,7 @@ import { login } from "../redux/authSlice";
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
 interface IProps {
@@ -78,39 +78,41 @@ const LoginScreen = ({navigation} : IProps) => {
       }
     };
 
-    
+    const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
 return (
-  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <SafeAreaView style={loginStyle.container}>
-      <View>
+  <KeyboardAwareScrollView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={loginStyle.container}>
         <View>
-          <Image source={require('../assets/login.png')} style={loginStyle.img} />
+          <View>
+            <Image source={require('../assets/login.png')} style={loginStyle.img} />
+          </View>
+          <View style={loginStyle.content}>
+            <Text style={loginStyle.textHeader}>
+                Login
+            </Text>
+              <Input
+                placeholder="Email ID"
+                keyboardType="email-address"
+                onChangeText={(e: string) => setData({...data, email: e})}
+                />
+              <Input
+                placeholder="Password"
+                onChangeText={(e: string) => setData({...data, password: e})}
+                secureTextEntry={true}
+                />
+              <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
+              <ButtonCustom
+                styleTO={loginStyle.buttonContainer}
+                styleText={loginStyle.buttonLabel}
+                labelTO="Login"
+                onPress={handleLogin}
+                />
+          </View>
         </View>
-        <View style={loginStyle.content}>
-          <Text style={loginStyle.textHeader}>
-              Login
-          </Text>
-            <Input
-              placeholder="Email ID"
-              keyboardType="email-address"
-              onChangeText={(e: string) => setData({...data, email: e})}
-              />
-            <Input
-              placeholder="Password"
-              onChangeText={(e: string) => setData({...data, password: e})}
-              secureTextEntry={true}
-              />
-            <Text style={loginStyle.textForgotPass}>Forgot Password?</Text>
-            <ButtonCustom
-              styleTO={loginStyle.buttonContainer}
-              styleText={loginStyle.buttonLabel}
-              labelTO="Login"
-              onPress={handleLogin}
-              />
-        </View>
-      </View>
-    </SafeAreaView>
-  </TouchableWithoutFeedback>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   )
 }
 
