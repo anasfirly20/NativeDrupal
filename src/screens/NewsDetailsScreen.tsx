@@ -19,14 +19,10 @@ import newsApi from "./news.api";
 import { filterText, formatDate } from "../utils";
 
 // Miscellaneous
-import { NavigationProp, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 // Types
-import { INewsDetail } from "../types/types";
-
-interface IProps {
-    navigation: NavigationProp<any>
-}
+import { INewsDetail, IProps } from "../types/types";
 
 const NewsDetailsScreen = ({navigation} : IProps) => {
     const route: any = useRoute()

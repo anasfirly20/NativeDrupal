@@ -29,17 +29,11 @@ import { useDispatch } from "react-redux";
 import { login } from "../redux/authSlice";
 
 // Miscellaneous
-import { NavigationProp } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
-interface IProps {
-    navigation: NavigationProp<any>;
-    // route: any
-  }
-
-const LoginScreen = ({navigation} : IProps) => {
+const LoginScreen = () => {
   const dispatch = useDispatch();
   
   const [data, setData] = useState<ILoginFormData>({
