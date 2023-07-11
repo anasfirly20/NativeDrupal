@@ -72,12 +72,6 @@ const NewsScreen = ({ navigation }: IProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log("EXECUTED")
-    getLocals()
-    getAllNews()
-  },[data?.["access-token"]])
-
   // NEWS
   const [news, setNews] = useState<Array<any>>([]);
 
@@ -95,6 +89,12 @@ const NewsScreen = ({ navigation }: IProps) => {
       console.log(error);
     }
   };
+  
+  useEffect(() => {
+    console.log("EXECUTED")
+    getLocals()
+    getAllNews()
+  },[data?.["access-token"]])
   
   // function navigate to show news details
   const handleCardPress = (id: number) => {
