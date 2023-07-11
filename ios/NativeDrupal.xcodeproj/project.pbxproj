@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* NativeDrupalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NativeDrupalTests.m */; };
+		07AC6E8A2A5D20C800CFA800 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07AC6E862A5D20C800CFA800 /* MaterialIcons.ttf */; };
+		07AC6E8B2A5D20C800CFA800 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07AC6E872A5D20C800CFA800 /* FontAwesome.ttf */; };
+		07AC6E8C2A5D20C800CFA800 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07AC6E882A5D20C800CFA800 /* MaterialCommunityIcons.ttf */; };
+		07AC6E8D2A5D20C800CFA800 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07AC6E892A5D20C800CFA800 /* AntDesign.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-NativeDrupal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-NativeDrupal.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -30,6 +34,10 @@
 		00E356EE1AD99517003FC87E /* NativeDrupalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NativeDrupalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* NativeDrupalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeDrupalTests.m; sourceTree = "<group>"; };
+		07AC6E862A5D20C800CFA800 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		07AC6E872A5D20C800CFA800 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		07AC6E882A5D20C800CFA800 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		07AC6E892A5D20C800CFA800 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* NativeDrupal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NativeDrupal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = NativeDrupal/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = NativeDrupal/AppDelegate.mm; sourceTree = "<group>"; };
@@ -83,9 +91,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		07D49D632A5D0B50002E7337 /* Fonts */ = {
+		07AC6E852A5D207100CFA800 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				07AC6E892A5D20C800CFA800 /* AntDesign.ttf */,
+				07AC6E872A5D20C800CFA800 /* FontAwesome.ttf */,
+				07AC6E882A5D20C800CFA800 /* MaterialCommunityIcons.ttf */,
+				07AC6E862A5D20C800CFA800 /* MaterialIcons.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -123,7 +135,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				07D49D632A5D0B50002E7337 /* Fonts */,
+				07AC6E852A5D207100CFA800 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* NativeDrupal */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* NativeDrupalTests */,
@@ -250,8 +262,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07AC6E8D2A5D20C800CFA800 /* AntDesign.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				07AC6E8C2A5D20C800CFA800 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				07AC6E8A2A5D20C800CFA800 /* MaterialIcons.ttf in Resources */,
+				07AC6E8B2A5D20C800CFA800 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
