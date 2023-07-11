@@ -91,7 +91,6 @@ const NewsScreen = ({ navigation }: IProps) => {
   };
   
   useEffect(() => {
-    console.log("EXECUTED")
     getLocals()
     getAllNews()
   },[data?.["access-token"]])

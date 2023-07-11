@@ -46,8 +46,6 @@ const NewsDetailsScreen = ({navigation} : IProps) => {
     }
     
     useEffect(() => {
-        console.log("DETAILSSS");
-        
         getNewsById(id)
     }, [])
 
