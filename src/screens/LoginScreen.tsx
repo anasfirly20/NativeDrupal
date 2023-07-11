@@ -25,11 +25,14 @@ import newsApi from "./news.api";
 // Types
 import { ILoginFormData } from "../types/types";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
+
 // Miscellaneous
 import { NavigationProp } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from "react-redux";
-import { login } from "../redux/authSlice";
+
 
 interface IProps {
     navigation: NavigationProp<any>;

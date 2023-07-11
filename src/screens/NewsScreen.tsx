@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 // Components
 import CardNews from "../components/CardNews";
@@ -58,14 +58,6 @@ const NewsScreen = ({ navigation }: IProps) => {
       getUID(),
     ]);
 
-    if (
-      accessToken === data?.["access-token"] &&
-      client === data?.client &&
-      uid === data?.uid
-    ) {
-      return;
-    }
-
     setData({
       ...data,
       "access-token": accessToken || "",
@@ -82,11 +74,9 @@ const NewsScreen = ({ navigation }: IProps) => {
 
   useEffect(() => {
     console.log("EXECUTED")
-    if(data){
-      getAllNews()
-    }
     getLocals()
-  },[data])
+    getAllNews()
+  },[data?.["access-token"]])
 
   // NEWS
   const [news, setNews] = useState<Array<any>>([]);
