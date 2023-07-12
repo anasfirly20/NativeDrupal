@@ -1,51 +1,45 @@
-import {
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-  FlatList,
-} from "react-native";
-import React, { useState, useEffect } from "react";
+import {Text, View, Image, SafeAreaView, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
 
 // Components
-import CardNews from "../components/CardNews";
-import HeaderCustom from "../components/HeaderCustom";
+import CardNews from '../components/CardNews';
+import HeaderCustom from '../components/HeaderCustom';
 
 // Styles
-import { newsStyle } from "../styles/News";
+import {newsStyle} from '../styles/News';
 
 // Api
-import newsApi from "./news.api";
+import newsApi from './news.api';
 
 // Utils
-import { getAccessToken, getUID, getClient, removeAccessToken } from "../utils";
+import {getAccessToken, getUID, getClient, removeAccessToken} from '../utils';
 
 // Miscellaneous
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useDispatch } from 'react-redux';
-import { logout } from "../redux/authSlice";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {logout} from '../redux/authSlice';
 
 // Types
-import { IProps, IUserData } from "../types/types";
+import {IProps, IUserData} from '../types/types';
 
 interface IData {
-  "access-token": string;
+  'access-token': string;
   uid: string;
   client: string;
 }
 
-const NewsScreen = ({ navigation }: IProps) => {
+const NewsScreen = ({navigation}: IProps) => {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    await removeAccessToken()
+    await removeAccessToken();
     dispatch(logout());
   };
 
   const [data, setData] = useState<IData>({
-    "access-token": "",
-    uid: "",
-    client: "",
+    'access-token': '',
+    uid: '',
+    client: '',
   });
 
   const [userData, setUserData] = useState<IUserData | null>(null);
@@ -60,12 +54,12 @@ const NewsScreen = ({ navigation }: IProps) => {
 
     setData({
       ...data,
-      "access-token": accessToken || "",
-      client: client || "",
-      uid: uid || "",
+      'access-token': accessToken || '',
+      client: client || '',
+      uid: uid || '',
     });
 
-    const userDataString = await AsyncStorage.getItem("userData");
+    const userDataString = await AsyncStorage.getItem('userData');
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       setUserData(userData);
@@ -79,7 +73,7 @@ const NewsScreen = ({ navigation }: IProps) => {
   const getAllNews = async () => {
     try {
       const res = await newsApi.getAllNews({
-        "access-token": data?.["access-token"],
+        'access-token': data?.['access-token'],
         client: data?.client,
         uid: data?.uid,
       });
@@ -89,40 +83,36 @@ const NewsScreen = ({ navigation }: IProps) => {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
-    getLocals()
-    getAllNews()
-  },[data?.["access-token"]])
-  
+    getLocals();
+    getAllNews();
+  }, [data?.['access-token']]);
+
   // function navigate to show news details
   const handleCardPress = (id: number) => {
-    navigation.navigate("NewsDetails", { id });
+    navigation.navigate('NewsDetails', {id});
   };
 
   return (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{flex: 1}}>
       <View style={newsStyle.profileContainer}>
         <View style={newsStyle.profileData}>
           <Image
-            source={{ uri: userData?.avatar_url }}
+            source={{uri: userData?.avatar_url}}
             style={newsStyle.profileImage}
           />
           <Text style={newsStyle.profileName}>
             {userData?.username && userData?.username}
           </Text>
         </View>
-        <HeaderCustom
-          label="Logout"
-          name="logout"
-          onPress={handleLogout}
-        />
+        <HeaderCustom label="Logout" name="logout" onPress={handleLogout} />
       </View>
       <Text style={newsStyle.textHeader}>News Feed</Text>
       <View style={newsStyle.contentContainer}>
         <FlatList
           data={news}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <CardNews
               title={item?.title}
               description={item?.short_text}
@@ -132,8 +122,8 @@ const NewsScreen = ({ navigation }: IProps) => {
               }}
             />
           )}
-          keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
+          keyExtractor={item => item.id.toString()}
+          ItemSeparatorComponent={() => <View style={{height: 15}} />}
           showsVerticalScrollIndicator={false}
         />
       </View>

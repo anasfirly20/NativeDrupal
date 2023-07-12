@@ -1,5 +1,5 @@
-import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native'
-import React from 'react'
+import {TouchableOpacity, Text, ViewStyle, TextStyle} from 'react-native';
+import React from 'react';
 
 interface ButtonCustomProps {
   styleTO?: ViewStyle;
@@ -8,18 +8,17 @@ interface ButtonCustomProps {
   labelTO: string;
 }
 
-const ButtonCustom = ({styleTO, onPress, styleText, labelTO} : ButtonCustomProps) => {
+const ButtonCustom = ({
+  styleTO,
+  onPress,
+  styleText,
+  labelTO,
+}: ButtonCustomProps) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      style={styleTO}
-      onPress={onPress}
-    >   
-    <Text style={styleText}>
-      {labelTO}
-    </Text>
+    <TouchableOpacity activeOpacity={0.7} style={styleTO} onPress={onPress}>
+      <Text style={styleText}>{labelTO}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default ButtonCustom
+export default ButtonCustom;

@@ -42,17 +42,16 @@ export const removeAccessToken = async (): Promise<void> => {
 // Get Data user
 export const getUserData = async (): Promise<void> => {
   try {
-    await AsyncStorage.getItem("userData")
+    await AsyncStorage.getItem('userData');
   } catch (error) {
     console.log(error);
-    
   }
-}
+};
 
 // Filter text
 export const filterText = (text: string) => {
-  return text.replace(/<\/?p>/g, '')
-}
+  return text.replace(/<\/?p>/g, '');
+};
 
 // Date format
 export const formatDate = (dateStr: string): string => {
